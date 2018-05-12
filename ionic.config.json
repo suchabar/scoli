@@ -1,0 +1,8 @@
+{
+  "name": "scoli",
+  "app_id": "fc4378b9",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
