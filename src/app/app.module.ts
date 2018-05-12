@@ -8,6 +8,7 @@ import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
 import { ItemDetailsPage } from '../pages/item-details/item-details';
 import { ListPage } from '../pages/list/list';
 
+import { BLE } from '@ionic-native/ble';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -15,6 +16,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { Pro } from '@ionic/pro';
 import { ErrorHandler, Injectable, Injector } from '@angular/core';
 import { IonicErrorHandler } from 'ionic-angular';
+
 
 Pro.init(APPCONFIG.appId, {
   appVersion: APPCONFIG.version
@@ -61,6 +63,7 @@ export class MyErrorHandler implements ErrorHandler {
     ListPage
   ],
   providers: [
+    BLE,
     StatusBar,
     SplashScreen,
     IonicErrorHandler,

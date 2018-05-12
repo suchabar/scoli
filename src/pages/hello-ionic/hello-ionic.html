@@ -10,16 +10,32 @@
 
 <ion-content padding>
 
-  <h3>Welcome to your first Ionic app!</h3>
+  <h3 text-center>Let's find out what type of scoliosis you have!</h3>
 
-  <p>
-    This starter project is our way of helping you get a functional app running in record time.
-  </p>
-  <p>
-    Follow along on the tutorial section of the Ionic docs!
-  </p>
-  <p>
-    <button ion-button color="primary" menuToggle>Toggle Menu</button>
-  </p>
+  <div class="scoli-container">
+    <img src="./assets/imgs/Scoli_0.png"/>
+    <img src="./assets/imgs/Scoli_left_right.png"/>
+    <img src="./assets/imgs/Scoli_right.png"/>
+  </div>
+  <div class="scoli-container" radio-group>
+      <ion-item>
+        <ion-label>None</ion-label>
+        <ion-radio checked="true" value="go"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Double</ion-label>
+        <ion-radio value="rust"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Single</ion-label>
+        <ion-radio value="python"></ion-radio>
+      </ion-item>
+  </div>
+
+  <div>
+    <button ion-button float-right margin-top="1rem" color="primary">Next</button>
+  </div>
 
 </ion-content>
