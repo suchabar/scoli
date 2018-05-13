@@ -10,23 +10,16 @@ import { ItemDetailsPage } from '../item-details/item-details';
   templateUrl: 'list.html'
 })
 export class ListPage {
+
+  statusMessage: string;
+  devices: any[] = [];
   icons: string[];
-  items: Array<{title: string, note: string, icon: string}>;
+  items: Array<{title: string, note: string}>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public ble: BLE
+    private ble: BLE
   ) {
-    this.icons = ['flask', 'wifi', 'beer', 'football', 'basketball', 'paper-plane',
-      'american-football', 'boat', 'bluetooth', 'build'];
-
     this.items = [];
-    // for (let i = 1; i < 11; i++) {
-    //   this.items.push({
-    //     title: 'Item ' + i,
-    //     note: 'This is item #' + i,
-    //     icon: this.icons[Math.floor(Math.random() * this.icons.length)]
-    //   });
-    // }
   }
 
   itemTapped(event, item) {
@@ -36,26 +29,26 @@ export class ListPage {
   }
 
   scanBLEDevices() {
-    console.log('started to search');
-    // this.ble.startScan([])
-    //   .subscribe(device => {
-    //     console.log(JSON.stringify(device));
-    //     this.items.push({
-    //       title: 'BLE device - ',
-    //       note: 'Note',
-    //       icon: this.icons[Math.floor(Math.random() * this.icons.length)]
-    //     });
-    //   });
-		//
-    // setTimeout(this.ble.stopScan,
-    //   5000,
-    //   function () {
-    //     console.log("Scan complete");
-    //   },
-    //   function () {
-    //     console.log("stopScan failed");
-    //   }
-    // );
+    this.statusMessage = 'Scanning for Bluetooth LE Devices';
+
+    this.devices = [] //clear list
+    this.ble.scan([], 5).subscribe(
+      device => this.onDeviceDiscovered(device),
+      error => this.scanError(error));
+
+    setTimeout(this.ble.stopScan, 5000, 'Scan complete');
   }
 
+  private onDeviceDiscovered(device) {
+    console.log('Discovered: ' + JSON.stringify(device, null, 2))
+    this.devices.push(device);
+    this.items.push({
+      title: device.name || 'Unnamed',
+      note: 'ID: ' + device.id + ' RSSI: ' + device.rssi
+    });
+  }
+
+  private scanError(error: any) {
+
+  }
 }

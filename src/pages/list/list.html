@@ -13,18 +13,19 @@
     To keep track of your progress pair actibelt via which you can measure degree of your spine indirection
   </p>
 
+  <p>{{statusMessage}}</p>
+
   <p>
     <button ion-button float-right color="primary" (click)="scanBLEDevices()">Pair Actibelt</button>
   </p>
 
 
-  <!--<ion-list>-->
-    <!--<button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">-->
-      <!--<ion-icon name="{{item.icon}}" item-left></ion-icon>-->
-      <!--{{item.title}}-->
-      <!--<div class="item-note" item-right>-->
-        <!--{{item.note}}-->
-      <!--</div>-->
-    <!--</button>-->
-  <!--</ion-list>-->
+  <ion-list>
+    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
+      {{item.title}}
+      <div class="item-note" item-right>
+        {{item.note}}
+      </div>
+    </button>
+  </ion-list>
 </ion-content>
