@@ -16,15 +16,21 @@
   <p>{{statusMessage}}</p>
 
   <p>
-    <button ion-button float-right color="primary" (click)="scanBLEDevices()">Pair Actibelt</button>
+    <button ion-button float-right color="primary" (click)="scanBLEDevices()">Search BLE devices</button>
   </p>
 
+  <p>
+    <button ion-button float-right color="primary" (click)="pairActibelt()">Connect to Actibelt stream of data</button>
+  </p>
+  <p>
+    {{accelerometryData}}
+  </p>
 
   <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      {{item.title}}
+    <button ion-item *ngFor="let device of devices" (click)="deviceSelected(device)">
+      {{ device.name || device.id }}
       <div class="item-note" item-right>
-        {{item.note}}
+        RSSI: {{ device.rssi }}
       </div>
     </button>
   </ion-list>

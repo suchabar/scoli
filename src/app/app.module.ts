@@ -16,6 +16,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { Pro } from '@ionic/pro';
 import { ErrorHandler, Injectable, Injector } from '@angular/core';
 import { IonicErrorHandler } from 'ionic-angular';
+import { BluetoothSerial } from '@ionic-native/bluetooth-serial';
+import { ChildService } from './service/ChildService';
+import { HttpClientModule } from '@angular/common/http';
+import { StoreItemService } from './service/StoreItemService';
+//import * as ByteBuffer from 'bytebuffer';
 
 
 Pro.init(APPCONFIG.appId, {
@@ -53,6 +58,7 @@ export class MyErrorHandler implements ErrorHandler {
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
@@ -64,6 +70,10 @@ export class MyErrorHandler implements ErrorHandler {
   ],
   providers: [
     BLE,
+    BluetoothSerial,
+    //ByteBuffer,
+    ChildService,
+    StoreItemService,
     StatusBar,
     SplashScreen,
     IonicErrorHandler,
