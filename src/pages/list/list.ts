@@ -3,7 +3,7 @@ import { Component, NgZone } from '@angular/core';
 import { BLE } from '@ionic-native/ble';
 import { NavController, NavParams } from 'ionic-angular';
 import { BluetoothSerial } from '@ionic-native/bluetooth-serial';
-// import * as ByteBuffer from 'bytebuffer';
+import * as ByteBuffer from 'bytebuffer';
 
 @Component({
   selector: 'page-list',
@@ -69,32 +69,20 @@ export class ListPage {
     this.ngZone.run(() => {
       this.statusMessage = 'SUCCESS - Actibelt connected';
     });
-
-
-    /**
+   /**
      * Wraps a buffer or a string. Sets the allocated ByteBuffer's ByteBuffer#offset to 0 and its ByteBuffer#limit to the length of the wrapped data.
      * @param buffer Anything that can be wrapped
      * @param encoding String encoding if buffer is a string ("base64", "hex", "binary", defaults to "utf8")
      * @param littleEndian Whether to use little or big endian byte order. Defaults to ByteBuffer.DEFAULT_ENDIAN.
      * @param noAssert Whether to skip assertions of offsets and values. Defaults to ByteBuffer.DEFAULT_NOASSERT.
-
   static wrap( buffer: ByteBuffer | ArrayBuffer | Uint8Array | string, enc?: string | boolean, littleEndian?: boolean, noAssert?: boolean ): ByteBuffer;
      */
 
-    // this.bluetoothSerial.subscribeRawData().subscribe((dt) => {
-    //   this.bluetoothSerial.read().then((dd) => {
-    //     let rawStream = new ByteBuffer(6, true, false);
-    //     let byteBuffer: ByteBuffer = ByteBuffer.wrap(rawStream, "hex", ByteBuffer.LITTLE_ENDIAN, ByteBuffer.DEFAULT_NOASSERT);
-    //     console.log("X: " + byteBuffer.readShort(0) + "Y: " + byteBuffer.readShort(1) + "Z: " + byteBuffer.readShort(2));
-		//
-    //     console.log("Inside READ" + dd);
-    //     this.ngZone.run(() => {
-    //       this.accelerometryData = dd;
-    //     });
-    //   });
-    // });
-
-
+    this.bluetoothSerial.subscribeRawData().subscribe((dt) => {
+      console.log("raw data >> " + dt);
+      let byteBuffer: ByteBuffer = ByteBuffer.wrap(dt, "binary", ByteBuffer.LITTLE_ENDIAN, ByteBuffer.DEFAULT_NOASSERT);
+      console.log("X: " + byteBuffer.readShort(0) + "Y: " + byteBuffer.readShort(1) + "Z: " + byteBuffer.readShort(2));
+    });
   }
 
   private onDeviceDisconnected(data: any) {
@@ -102,7 +90,5 @@ export class ListPage {
     this.ngZone.run(() => {
       this.statusMessage = 'Error - Actibelt not connected';
     });
-
   }
-
 }
