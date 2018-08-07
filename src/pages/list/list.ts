@@ -13,6 +13,8 @@ export class ListPage {
 
   statusMessage: string;
   accelerometryData = '';
+  startWearing = '';
+  endWearing = '';
   devices: any[] = [];
 
   constructor(public navCtrl: NavController,
@@ -82,13 +84,25 @@ export class ListPage {
       console.log("raw data >> " + dt);
       let byteBuffer: ByteBuffer = ByteBuffer.wrap(dt, "binary", ByteBuffer.LITTLE_ENDIAN, ByteBuffer.DEFAULT_NOASSERT);
       console.log("X: " + byteBuffer.readShort(0) + "Y: " + byteBuffer.readShort(1) + "Z: " + byteBuffer.readShort(2));
+
+      if(this.startWearing === '') {
+        var today = new Date();
+        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        this.startWearing = time;
+      }
+      console.log('TIME STARTWEARING' +  this.startWearing);
     });
   }
 
   private onDeviceDisconnected(data: any) {
-    console.log("Error - Actibelt not connected");
+    console.log("Actibelt disconnected");
     this.ngZone.run(() => {
-      this.statusMessage = 'Error - Actibelt not connected';
+      this.statusMessage = 'Actibelt disconnected';
+
+      var today = new Date();
+      var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      console.log(time);
+      this.endWearing = time;
     });
   }
 }

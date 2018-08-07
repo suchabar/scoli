@@ -3,35 +3,51 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Actibelt pairing</ion-title>
+    <ion-title>Actibelt test</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
 
-  <p>
-    To keep track of your progress pair actibelt via which you can measure degree of your spine indirection
-  </p>
+  <div class="container">
+    <p>STATUS - {{statusMessage}}</p>
 
-  <p>{{statusMessage}}</p>
 
-  <p>
-    <button ion-button float-right color="primary" (click)="scanBLEDevices()">Search BLE devices</button>
-  </p>
+    <h2> Wearing started - {{startWearing}}
+    </h2>
 
-  <p>
-    <button ion-button float-right color="primary" (click)="pairActibelt()">Connect to Actibelt stream of data</button>
-  </p>
-  <p>
-    {{accelerometryData}}
-  </p>
+    <h2> Wearing ended - {{endWearing}}
+    </h2>
 
-  <ion-list>
-    <button ion-item *ngFor="let device of devices" (click)="deviceSelected(device)">
-      {{ device.name || device.id }}
-      <div class="item-note" item-right>
-        RSSI: {{ device.rssi }}
-      </div>
-    </button>
-  </ion-list>
+    <button ion-button float-right color="primary" (click)="pairActibelt()">TEST CONNECTION</button>
+  </div>
+
+
+
+
+  <!--<p>-->
+  <!--To keep track of your progress pair actibelt via which you can measure degree of your spine indirection-->
+  <!--</p>-->
+
+  <!--<p>{{statusMessage}}</p>-->
+
+  <!--<p>-->
+  <!--<button ion-button float-right color="primary" (click)="scanBLEDevices()">Search BLE devices</button>-->
+  <!--</p>-->
+
+  <!--<p>-->
+  <!--<button ion-button float-right color="primary" (click)="pairActibelt()">Connect to Actibelt stream of data</button>-->
+  <!--</p>-->
+  <!--<p>-->
+  <!--{{accelerometryData}}-->
+  <!--</p>-->
+
+  <!--<ion-list>-->
+  <!--<button ion-item *ngFor="let device of devices" (click)="deviceSelected(device)">-->
+  <!--{{ device.name || device.id }}-->
+  <!--<div class="item-note" item-right>-->
+  <!--RSSI: {{ device.rssi }}-->
+  <!--</div>-->
+  <!--</button>-->
+  <!--</ion-list>-->
 </ion-content>
